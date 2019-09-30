@@ -1,5 +1,5 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
-import {StyleSheet, Dimensions} from 'react-native'
+import {Dimensions, StyleSheet} from 'react-native'
 
 const {height, width} = Dimensions.get('screen')
 
@@ -59,17 +59,10 @@ export default StyleSheet.create({
   line: {
     width: width / 1.38,
   },
-  touchForget: {
-    alignItems: 'flex-end',
-  },
-  textForget: {
-    marginRight: 30,
-    marginTop: 7,
-  },
-  viewLogin: {
+  viewSignUp: {
     alignItems: 'center',
   },
-  touchLogin: {
+  touchSignUp: {
     borderRadius: 30,
     height: 55,
     width: 140,
@@ -78,15 +71,25 @@ export default StyleSheet.create({
     marginTop: -45,
     backgroundColor: '#5591ff',
   },
-  textLogin: {
+  textSignUp: {
     fontSize: 18,
     color: '#ffffff',
   },
-  touchSignUp: {
-    marginTop: 30,
+  viewBack: {
+    marginLeft: 20,
+    marginTop: 20,
   },
-  textSignUp: {
-    fontSize: 18,
-    color: '#5591ff',
+  touchBack: {
+    position: 'absolute',
+  },
+  imgCircle: {
+    width: 52,
+    height: 52,
+  },
+  imgArrow: {
+    width: 18,
+    height: 16,
+    marginTop: 14,
+    marginLeft: 16,
   },
 })

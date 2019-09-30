@@ -1,17 +1,13 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {ScrollView, Image, ImageBackground, View, TextInput, TouchableOpacity, Text} from 'react-native'
+import {Image, ImageBackground, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {connect} from 'react-redux'
 
-import styles from './Styles/LoginScreenStyle'
+import styles from './Styles/SignUpScreenStyle'
 
-class LoginScreen extends Component {
-  navigateToSignUp = () => {
-    this.props.navigation.navigate('SignUpScreen')
-  }
-
-  navigateToMain = () => {
-    this.props.navigation.navigate('MainScreen')
+class SignUpScreen extends Component {
+  goBackToLogin = () => {
+    this.props.navigation.goBack()
   }
 
   render() {
@@ -67,26 +63,44 @@ class LoginScreen extends Component {
                   source={require('../Images/Login/Line.png')}
                   style={styles.line}
                 />
-              </View>
-              <View style={styles.touchForget}>
-                <TouchableOpacity>
-                  <Text style={styles.textForget}>Forget Password</Text>
-                </TouchableOpacity>
+                <View style={styles.box}>
+                  <Image
+                    source={require('../Images/Login/Pass.png')}
+                    style={styles.iconPass}
+                  />
+                  <TextInput
+                    placeholder='Confirm Password'
+                    style={styles.textip}
+                  />
+                </View>
+                <Image
+                  source={require('../Images/Login/Line.png')}
+                  style={styles.line}
+                />
               </View>
             </ImageBackground>
           </View>
-          <View style={styles.viewLogin}>
-            <TouchableOpacity
-              style={styles.touchLogin}
-              onPress={this.navigateToMain}
-            >
-              <Text style={styles.textLogin}>Login</Text>
-            </TouchableOpacity>
+          <View style={styles.viewSignUp}>
             <TouchableOpacity
               style={styles.touchSignUp}
-              onPress={this.navigateToSignUp}
             >
               <Text style={styles.textSignUp}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewBack}>
+            <TouchableOpacity
+              style={styles.touchBack}
+              onPress={this.goBackToLogin}
+            >
+              <ImageBackground
+                source={require('../Images/Login/Circle.png')}
+                style={styles.imgCircle}
+              >
+                <Image
+                  source={require('../Images/Login/Left-Arrow.png')}
+                  style={styles.imgArrow}
+                />
+              </ImageBackground>
             </TouchableOpacity>
           </View>
         </ImageBackground>
@@ -105,4 +119,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen)
