@@ -1,17 +1,86 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {ScrollView, Image, ImageBackground, View, TextInput, TouchableOpacity, Text} from 'react-native'
+import {ScrollView, Image, ImageBackground, View, TextInput, TouchableOpacity, Text, Alert, AsyncStorage} from 'react-native'
 import {connect} from 'react-redux'
-
+import {NavigationActions, StackActions} from 'react-navigation'
 import styles from './Styles/LoginScreenStyle'
+import {LoginTypes} from '../Redux/LoginRedux'
 
 class LoginScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      phone_number: '',
+      password: '',
+      payload: '',
+      isLoading: false,
+      isChecking: false,
+    }
+  }
+
+  getValueUsername = (text) => this.setState({phone_number: text})
+  getValuePassword = (text) => this.setState({password: text})
+
+  rememberUser = () => {
+    AsyncStorage.setItem('phone_number', this.state.phone_number)
+    AsyncStorage.setItem('password', this.state.password)
+  }
+
+  getremembedUser = async () => {
+    const phone_number = await AsyncStorage.getItem('phone_number')
+    const password = await AsyncStorage.getItem('password')
+    await this.setState({phone_number, password})
+  }
+
+  navigateToMain = () => {
+    const {payload} = this.state
+    const data = {
+      phone_number: this.state.phone_number,
+      password: this.state.password,
+      device_token: '1',
+      device_os: '1',
+      checkVersion: '1',
+    }
+    this.setState({
+      isLoading: true,
+      isChecking: true,
+    })
+    this.rememberUser()
+    this.props.checkLogin(data)
+    this.props.deletePayload(payload)
+  }
+
   navigateToSignUp = () => {
     this.props.navigation.navigate('SignUpScreen')
   }
 
-  navigateToMain = () => {
-    this.props.navigation.navigate('MainScreen')
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.payload.payload != null) {
+      if (nextProps.payload.payload.status_code !== 200 && prevState.isChecking && nextProps.payload.payload.message) {
+        Alert.alert(nextProps.payload.payload.message)
+        return {
+          isLoading: false,
+          isChecking: false,
+        }
+      }
+      if (nextProps.payload.payload.status_code === 200 && prevState.isChecking && nextProps.payload.payload.message) {
+        AsyncStorage.setItem('token', nextProps.payload.payload.data.token)
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({routeName: 'MainScreen'})],
+        })
+        nextProps.navigation.dispatch(resetAction)
+        return {
+          isLoading: false,
+          isChecking: false,
+        }
+      }
+    }
+    return null
+  }
+
+  componentDidMount() {
+    this.getremembedUser()
   }
 
   render() {
@@ -47,6 +116,8 @@ class LoginScreen extends Component {
                   <TextInput
                     placeholder='Email Address'
                     style={styles.textip}
+                    onChangeText={this.getValueUsername}
+                    value={this.state.phone_number}
                   />
                 </View>
                 <Image
@@ -61,6 +132,8 @@ class LoginScreen extends Component {
                   <TextInput
                     placeholder='Password'
                     style={styles.textip}
+                    onChangeText={this.getValuePassword}
+                    value={this.state.password}
                   />
                 </View>
                 <Image
@@ -97,11 +170,20 @@ class LoginScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    payload: state.login,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    checkLogin: (data) => dispatch({
+      type: LoginTypes.LOGIN_REQUEST,
+      data,
+    }),
+    deletePayload: (payload) => dispatch({
+      type: LoginTypes.LOGIN_DELETE_PAYLOAD,
+      payload,
+    }),
   }
 }
 

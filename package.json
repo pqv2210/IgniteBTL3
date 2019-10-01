@@ -31,6 +31,7 @@
     "eslint-plugin-react": "^7.14.3",
     "format-json": "1.0.3",
     "identity-obj-proxy": "3.0.0",
+    "ignite-redux-logger": "^0.2.1",
     "lodash": "4.17.15",
     "prop-types": "^15.7.2",
     "querystringify": "2.1.1",

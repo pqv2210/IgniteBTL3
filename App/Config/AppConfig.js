@@ -1,8 +1,7 @@
-// Simple React Native specific changes
+// Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 
 import '../I18n/I18n'
 
 export default {
-  // font scaling override - RN default is on
-  allowTextFontScaling: true
+  allowTextFontScaling: true,
 }
