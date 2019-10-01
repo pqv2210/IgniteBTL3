@@ -5,10 +5,12 @@ import {connect} from 'react-redux'
 import {NavigationActions, StackActions} from 'react-navigation'
 import styles from './Styles/LoginScreenStyle'
 import {LoginTypes} from '../Redux/LoginRedux'
+import viewLoading from '../Components/ViewLoading'
 
 class LoginScreen extends Component {
   constructor(props) {
     super(props)
+    this.autoLogin()
     this.state = {
       phone_number: '',
       password: '',
@@ -16,6 +18,12 @@ class LoginScreen extends Component {
       isLoading: false,
       isChecking: false,
     }
+  }
+
+  async autoLogin() {
+    AsyncStorage.getItem('token').then((token) => {
+      this.props.navigation.navigate(token ? 'MainScreen' : 'LoginScreen')
+    })
   }
 
   getValueUsername = (text) => this.setState({phone_number: text})
@@ -84,6 +92,14 @@ class LoginScreen extends Component {
   }
 
   render() {
+    const btnLogin = (
+      <TouchableOpacity
+        style={styles.touchLogin}
+        onPress={this.navigateToMain}
+      >
+        <Text style={styles.textLogin}>Login</Text>
+      </TouchableOpacity>
+    )
     return (
       <ScrollView>
         <ImageBackground
@@ -149,12 +165,7 @@ class LoginScreen extends Component {
             </ImageBackground>
           </View>
           <View style={styles.viewLogin}>
-            <TouchableOpacity
-              style={styles.touchLogin}
-              onPress={this.navigateToMain}
-            >
-              <Text style={styles.textLogin}>Login</Text>
-            </TouchableOpacity>
+            {this.state.isLoading ? viewLoading : btnLogin}
             <TouchableOpacity
               style={styles.touchSignUp}
               onPress={this.navigateToSignUp}
