@@ -21,7 +21,7 @@ class LoginScreen extends Component {
   }
 
   async autoLogin() {
-    AsyncStorage.getItem('token').then((token) => {
+    await AsyncStorage.getItem('token').then((token) => {
       this.props.navigation.navigate(token ? 'MainScreen' : 'LoginScreen')
     })
   }
