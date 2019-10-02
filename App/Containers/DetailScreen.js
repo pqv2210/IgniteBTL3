@@ -6,21 +6,47 @@ import {connect} from 'react-redux'
 import styles from './Styles/DetailScreenStyle'
 
 class DetailScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      marker: {},
+    }
+  }
+
+  componentDidMount() {
+    const marker = this.props.navigation.getParam('marker', 'NO-ID')
+    this.setState({marker})
+  }
+
   render() {
+    const {marker} = this.state
     return (
       <View style={styles.container}>
-        <View style={styles.boxAvatar}>
-          <Image
-            style={styles.imgAvatar}
-          />
-        </View>
+        <Image
+          style={styles.imgAvatar}
+          source={{uri: marker.url_avatar}}
+        />
         <View style={styles.box}>
           <View style={styles.boxInfo}>
             <View style={styles.boxInfoName}>
-              <Text>Name</Text>
+              <Text style={styles.textName}>{marker.fullname}</Text>
+              <Text style={styles.textbks}>{marker.bien_kiem_soat}</Text>
             </View>
             <View style={styles.boxInfoIndex}>
-              <Text>Index</Text>
+              <View style={styles.indexBigView}>
+                <View style={styles.indexView}>
+                  <Text style={styles.indexText}>1000</Text>
+                  <Text style={styles.indexText}>Followers</Text>
+                </View>
+                <View style={styles.indexView}>
+                  <Text style={styles.indexText}>2019</Text>
+                  <Text style={styles.indexText}>Following</Text>
+                </View>
+                <View style={styles.indexView}>
+                  <Text style={styles.indexText}>10</Text>
+                  <Text style={styles.indexText}>Shots</Text>
+                </View>
+              </View>
               <TouchableOpacity
                 style={styles.touchFollow}
               >

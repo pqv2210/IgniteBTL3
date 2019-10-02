@@ -4,21 +4,40 @@ import {StyleSheet, Dimensions} from 'react-native'
 const {height, width} = Dimensions.get('screen')
 
 export default StyleSheet.create({
-  mapView: {
-    height,
-    width,
-  },
   container: {
     position: 'absolute',
     alignItems: 'center',
     height,
     width,
   },
-  touch: {
+  mapView: {
+    height,
+    width,
+  },
+  viewPoint: {
+    height: 40,
+    width: 100,
+    borderRadius: 10,
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+  },
+  markerAvatar: {
+    height: 25,
+    width: 25,
+    borderRadius: 12.5,
+    margin: 3,
+  },
+  markerName: {
+    fontSize: 10,
+    color: '#000000',
+  },
+  touchLogOut: {
     position: 'absolute',
     height: 40,
     width: 40,
-    margin: 20,
+    marginLeft: width / 22,
+    marginTop: height / 13,
     left: 0,
   },
   imgSignOut: {
@@ -58,7 +77,7 @@ export default StyleSheet.create({
   },
   age: {
     fontSize: 13,
-    color: '#000000',
+    color: '#232323',
   },
   touchFollow: {
     height: height / 17,

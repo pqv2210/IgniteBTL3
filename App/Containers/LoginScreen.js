@@ -6,6 +6,7 @@ import {NavigationActions, StackActions} from 'react-navigation'
 import styles from './Styles/LoginScreenStyle'
 import {LoginTypes} from '../Redux/LoginRedux'
 import viewLoading from '../Components/ViewLoading'
+import {api} from '../Sagas'
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class LoginScreen extends Component {
 
   async autoLogin() {
     await AsyncStorage.getItem('token').then((token) => {
+      console.log('login token', token)
       this.props.navigation.navigate(token ? 'MainScreen' : 'LoginScreen')
     })
   }
@@ -73,6 +75,7 @@ class LoginScreen extends Component {
       }
       if (nextProps.payload.payload.status_code === 200 && prevState.isChecking && nextProps.payload.payload.message) {
         AsyncStorage.setItem('token', nextProps.payload.payload.data.token)
+        api.api.setHeader('Authorization', 'Bearer ' + nextProps.payload.payload.data.token)
         const resetAction = StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({routeName: 'MainScreen'})],

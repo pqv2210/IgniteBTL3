@@ -8,20 +8,15 @@ export default StyleSheet.create({
     height,
     width,
   },
-  boxAvatar: {
-    width,
-    height: height / 2.4,
-    backgroundColor: '#d9fed8',
-  },
   imgAvatar: {
     width,
-    height: height / 3,
-    borderWidth: 1,
+    height: height / 2.4,
   },
   box: {
-    alignItems: 'center',
     height: height / 1.97,
     width,
+    alignItems: 'center',
+    borderRadius: 3,
   },
   boxInfo: {
     borderRadius: 5,
@@ -43,11 +38,34 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ffffff',
   },
+  textName: {
+    fontSize: 30,
+    color: '#000000',
+    margin: 4,
+  },
+  textbks: {
+    fontSize: 15,
+    color: '#000000',
+  },
   boxInfoIndex: {
     height: height / 6.3,
     width: width / 1.35,
     alignItems: 'center',
     backgroundColor: '#f9f9f9',
+  },
+  indexBigView: {
+    flexDirection: 'row',
+  },
+  indexView: {
+    width: width / 4.05,
+    height: height / 6.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  indexText: {
+    fontSize: 17,
+    color: '#000000',
+
   },
   touchFollow: {
     alignItems: 'center',
@@ -55,7 +73,7 @@ export default StyleSheet.create({
     height: height / 15,
     width: width / 2.7,
     borderRadius: 5,
-    marginTop: width / 5.8,
+    marginTop: -width / 18,
     backgroundColor: '#3AA593',
   },
   textFollow: {
