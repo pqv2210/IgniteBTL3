@@ -153,6 +153,7 @@ class LoginScreen extends Component {
                   <TextInput
                     placeholder='Password'
                     style={styles.textip}
+                    secureTextEntry={true}
                     onChangeText={this.getValuePassword}
                     value={this.state.password}
                   />
