@@ -8,14 +8,17 @@ import {LoginTypes} from '../Redux/LoginRedux'
 import viewLoading from '../Components/ViewLoading'
 import {api} from '../Sagas'
 
+const resetAction = StackActions.reset({
+  index: 0,
+  actions: [NavigationActions.navigate({routeName: 'MainScreen'})],
+})
+
 class LoginScreen extends Component {
   constructor(props) {
     super(props)
-    this.autoLogin()
     this.state = {
       phone_number: '',
       password: '',
-      payload: '',
       isLoading: false,
       isChecking: false,
     }
@@ -23,8 +26,7 @@ class LoginScreen extends Component {
 
   async autoLogin() {
     await AsyncStorage.getItem('token').then((token) => {
-      console.log('login token', token)
-      this.props.navigation.navigate(token ? 'MainScreen' : 'LoginScreen')
+      this.props.navigation.navigate(token ? this.props.navigation.dispatch(resetAction) : 'LoginScreen')
     })
   }
 
@@ -76,15 +78,14 @@ class LoginScreen extends Component {
       if (nextProps.payload.payload.status_code === 200 && prevState.isChecking && nextProps.payload.payload.message) {
         AsyncStorage.setItem('token', nextProps.payload.payload.data.token)
         api.api.setHeader('Authorization', 'Bearer ' + nextProps.payload.payload.data.token)
-        const resetAction = StackActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({routeName: 'MainScreen'})],
-        })
         nextProps.navigation.dispatch(resetAction)
         return {
           isLoading: false,
           isChecking: false,
         }
+      }
+      if (nextProps.payload.status_code === 401) {
+        Alert.alert(nextProps.payload.message)
       }
     }
     return null
@@ -92,6 +93,7 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.getremembedUser()
+    this.autoLogin()
   }
 
   render() {

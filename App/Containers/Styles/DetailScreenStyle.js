@@ -92,4 +92,7 @@ export default StyleSheet.create({
     fontSize: 18,
     color: '#000000',
   },
+  flatList: {
+    width: width / 1.13,
+  },
 })

@@ -1,7 +1,7 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
 import {View, Text, Image, TouchableOpacity} from 'react-native'
-import styles from '../Containers/Styles/MainScreenStyle'
+import styles from './Styles/PopUpStyle'
 
 export default class PopUp extends Component {
   constructor(props) {
@@ -16,16 +16,17 @@ export default class PopUp extends Component {
   }
 
   render() {
+    const {marker} = this.props
     return (
       <View style={styles.box}>
         <View style={styles.boxInfo}>
           <Image
             style={styles.boxAvatar}
-            source={{uri: this.props.marker.url_avatar}}
+            source={{uri: marker.url_avatar}}
           />
           <View style={styles.boxNameAge}>
-            <Text style={styles.name}>{this.props.marker.fullname}</Text>
-            <Text style={styles.age}>{this.props.marker.age}</Text>
+            <Text style={styles.name}>{marker.fullname}</Text>
+            <Text style={styles.age}>{marker.truck_model}</Text>
           </View>
           <TouchableOpacity
             style={styles.touchFollow}
@@ -34,9 +35,12 @@ export default class PopUp extends Component {
             <Text style={styles.textfollow}>Follow</Text>
           </TouchableOpacity>
         </View>
-        <Image
-          style={styles.picture}
-        />
+        <View style={styles.pic}>
+          <Image
+            style={styles.picture}
+            source={require('../Images/download.jpeg')}
+          />
+        </View>
       </View>
     )
   }

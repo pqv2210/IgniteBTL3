@@ -9,6 +9,11 @@ import {MainTypes} from '../Redux/MainRedux'
 import {NavigationActions, StackActions} from 'react-navigation'
 import PopUp from '../Components/PopUp'
 
+const resetAction = StackActions.reset({
+  index: 0,
+  actions: [NavigationActions.navigate({routeName: 'LoginScreen'})],
+})
+
 class MainScreen extends Component {
   constructor(props) {
     super(props)
@@ -28,17 +33,13 @@ class MainScreen extends Component {
 
   logOut = () => {
     Alert.alert(
-      'Message',
+      'Confirm',
       'Do you want log out?',
       [
         {
           text: 'OK',
           onPress: () => {
             this.removeItem()
-            const resetAction = StackActions.reset({
-              index: 0,
-              actions: [NavigationActions.navigate({routeName: 'LoginScreen'})],
-            })
             this.props.navigation.dispatch(resetAction)
           },
         },
@@ -56,6 +57,22 @@ class MainScreen extends Component {
           isLoading: false,
           data: nextProps.payload.payload.data,
         }
+      }
+      if (nextProps.payload.payload.status_code === 401) {
+        Alert.alert(
+          '',
+          nextProps.payload.payload.message,
+          [
+            {
+              text: 'OK',
+              onPress: async () => {
+                nextProps.deletePayload(nextProps.payload.payload)
+                await AsyncStorage.removeItem('token')
+                nextProps.navigation.dispatch(resetAction)
+              },
+            },
+          ]
+        )
       }
     }
     return null
@@ -138,6 +155,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getList: () => dispatch({
       type: MainTypes.MAIN_REQUEST,
+    }),
+    deletePayload: (payload) => dispatch({
+      type: MainTypes.MAIN_DELETE_PAYLOAD,
+      payload,
     }),
   }
 }

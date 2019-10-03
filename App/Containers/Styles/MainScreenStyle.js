@@ -92,8 +92,8 @@ export default StyleSheet.create({
     color: '#ffffff',
   },
   picture: {
-    height: 60,
-    width: 80,
+    height: 70,
+    width: 100,
     borderWidth: 1,
   },
 })

@@ -2,6 +2,7 @@
 import React, {Component} from 'react'
 import {View, Image, Text, TouchableOpacity, FlatList} from 'react-native'
 import {connect} from 'react-redux'
+import RenderList from '../Components/RenderList'
 
 import styles from './Styles/DetailScreenStyle'
 
@@ -10,16 +11,47 @@ class DetailScreen extends Component {
     super(props)
     this.state = {
       marker: {},
+      data: {},
     }
   }
 
   componentDidMount() {
     const marker = this.props.navigation.getParam('marker', 'NO-ID')
-    this.setState({marker})
+    this.setState({
+      marker,
+      data: [
+        {
+          url_img: 'https://placeimg.com/100/100/any',
+        },
+        {
+          url_img: 'https://placeimg.com/100/100/nature',
+        },
+        {
+          url_img: 'https://placeimg.com/100/100/anime',
+        },
+        {
+          url_img: 'https://placeimg.com/100/100/animals',
+        },
+        {
+          url_img: 'https://placeimg.com/100/100/meow',
+        },
+        {
+          url_img: 'https://placeimg.com/100/100/coffee',
+        },
+        {
+          url_img: 'https://placeimg.com/100/100/tech',
+        },
+      ],
+    })
   }
 
+  renderItem = ({item}) =>
+    (<RenderList
+      item={item}
+    />)
+
   render() {
-    const {marker} = this.state
+    const {marker, data} = this.state
     return (
       <View style={styles.container}>
         <Image
@@ -57,7 +89,10 @@ class DetailScreen extends Component {
           <View style={styles.boxRecent}>
             <Text style={styles.textRecent}>Recent shots</Text>
             <FlatList
+              data={data}
+              style={styles.flatList}
               horizontal='true'
+              renderItem={this.renderItem}
             />
           </View>
         </View>
@@ -76,4 +111,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailScreen)
+export default connect(null, null)(DetailScreen)

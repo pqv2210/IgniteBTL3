@@ -7,7 +7,8 @@ import Immutable from 'seamless-immutable'
 const {Types, Creators} = createActions({
   mainRequest: ['data'],
   mainSuccess: ['payload'],
-  mainFailure: null,
+  mainFailure: ['payload'],
+  mainDeletePayload: null,
 })
 
 export const MainTypes = Types
@@ -37,12 +38,18 @@ export const request = (state, {data}) =>
 // successful api lookup
 export const success = (state, action) => {
   const {payload} = action
-  return state.merge({fetching: false, error: null, payload})
+  return state.merge({fetching: false, payload})
 }
 
 // Something went wrong somewhere.
-export const failure = (state) =>
-  state.merge({fetching: false, error: true, payload: null})
+export const failure = (state, action) => {
+  const {payload} = action
+  return state.merge({fetching: false, payload})
+}
+
+export const deletePayload = (state) => {
+  return state.merge({fetching: false, payload: ''})
+}
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -50,4 +57,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.MAIN_REQUEST]: request,
   [Types.MAIN_SUCCESS]: success,
   [Types.MAIN_FAILURE]: failure,
+  [Types.MAIN_DELETE_PAYLOAD]: deletePayload,
 })
