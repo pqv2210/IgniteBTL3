@@ -8,7 +8,7 @@ export default StyleSheet.create({
     height: height / 3.5,
     width: width / 1.13,
     borderRadius: 15,
-    marginTop: height / 1.6,
+    marginTop: height / 1.9,
     backgroundColor: '#ffffff',
     position: 'absolute',
   },

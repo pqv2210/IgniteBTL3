@@ -10,7 +10,7 @@ export default StyleSheet.create({
   },
   imgAvatar: {
     width,
-    height: height / 2.4,
+    height: height / 2.9,
   },
   box: {
     height: height / 1.97,
@@ -26,7 +26,7 @@ export default StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 6,
+      height: 5,
     },
     shadowOpacity: 0.39,
     shadowRadius: 8.30,

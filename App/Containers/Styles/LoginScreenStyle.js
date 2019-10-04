@@ -23,6 +23,7 @@ export default StyleSheet.create({
   path: {
     width: 319,
     height: 349,
+    alignItems: 'center',
   },
   viewimguser: {
     alignItems: 'center',
@@ -60,11 +61,15 @@ export default StyleSheet.create({
     width: width / 1.38,
   },
   touchForget: {
-    alignItems: 'flex-end',
   },
   textForget: {
-    marginRight: 30,
-    marginTop: 7,
+    marginLeft: width / 2.4,
+    marginTop: 5,
+    alignItems: 'flex-end',
+  },
+  message: {
+    color: 'red',
+    margin: 5,
   },
   viewLogin: {
     alignItems: 'center',

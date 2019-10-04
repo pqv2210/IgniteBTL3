@@ -21,6 +21,8 @@ class LoginScreen extends Component {
       password: '',
       isLoading: false,
       isChecking: false,
+      isCheckText: false,
+      mesNull: '',
     }
   }
 
@@ -45,21 +47,42 @@ class LoginScreen extends Component {
   }
 
   navigateToMain = () => {
-    const {payload} = this.state
-    const data = {
-      phone_number: this.state.phone_number,
-      password: this.state.password,
-      device_token: '1',
-      device_os: '1',
-      checkVersion: '1',
+    const {payload, phone_number, password} = this.state
+    if (!phone_number) {
+      this.setState({
+        isCheckText: true,
+        mesNull: 'Enter phone number.',
+      })
     }
-    this.setState({
-      isLoading: true,
-      isChecking: true,
-    })
-    this.rememberUser()
-    this.props.checkLogin(data)
-    this.props.deletePayload(payload)
+    if (!password) {
+      this.setState({
+        isCheckText: true,
+        mesNull: 'Enter password',
+      })
+    }
+    if (!phone_number && !password) {
+      this.setState({
+        isCheckText: true,
+        mesNull: 'Enter phone number and password.',
+      })
+    }
+    if (phone_number && password) {
+      const data = {
+        phone_number: this.state.phone_number,
+        password: this.state.password,
+        device_token: '1',
+        device_os: '1',
+        checkVersion: '1',
+      }
+      this.setState({
+        isLoading: true,
+        isChecking: true,
+        isCheckText: false,
+      })
+      this.rememberUser()
+      this.props.checkLogin(data)
+      this.props.deletePayload(payload)
+    }
   }
 
   navigateToSignUp = () => {
@@ -97,6 +120,7 @@ class LoginScreen extends Component {
   }
 
   render() {
+    const {isCheckText, mesNull} = this.state
     const btnLogin = (
       <TouchableOpacity
         style={styles.touchLogin}
@@ -104,6 +128,9 @@ class LoginScreen extends Component {
       >
         <Text style={styles.textLogin}>Login</Text>
       </TouchableOpacity>
+    )
+    const errMes = (
+      <Text style={styles.message}>{mesNull}</Text>
     )
     return (
       <ScrollView>
@@ -137,6 +164,11 @@ class LoginScreen extends Component {
                   <TextInput
                     placeholder='Email Address'
                     style={styles.textip}
+                    returnKeyType='next'
+                    clearButtonMode='always'
+                    onSubmitEditing={() => {
+                      this.secondTextInput.focus()
+                    }}
                     onChangeText={this.getValueUsername}
                     value={this.state.phone_number}
                   />
@@ -153,6 +185,11 @@ class LoginScreen extends Component {
                   <TextInput
                     placeholder='Password'
                     style={styles.textip}
+                    clearButtonMode={'while-editing'}
+                    ref={(input) => {
+                      this.secondTextInput = input
+                    }}
+                    onSubmitEditing={this.navigateToMain}
                     secureTextEntry={true}
                     onChangeText={this.getValuePassword}
                     value={this.state.password}
@@ -163,11 +200,10 @@ class LoginScreen extends Component {
                   style={styles.line}
                 />
               </View>
-              <View style={styles.touchForget}>
-                <TouchableOpacity>
-                  <Text style={styles.textForget}>Forget Password</Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity>
+                <Text style={styles.textForget}>Forget Password</Text>
+              </TouchableOpacity>
+              {isCheckText ? errMes : null}
             </ImageBackground>
           </View>
           <View style={styles.viewLogin}>
