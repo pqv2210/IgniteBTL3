@@ -7,18 +7,12 @@ export default StyleSheet.create({
   imgBg: {
     width,
     height,
-  },
-  header: {
     alignItems: 'center',
-    width,
-    marginVertical: 63,
   },
   origamibird: {
     width: 96,
     height: 79,
-  },
-  viewPath: {
-    alignItems: 'center',
+    marginVertical: 63,
   },
   path: {
     width: 319,
@@ -69,12 +63,9 @@ export default StyleSheet.create({
     fontSize: 18,
     color: '#ffffff',
   },
-  viewBack: {
-    marginLeft: 20,
-    marginTop: 20,
-  },
   touchBack: {
-    position: 'absolute',
+    margin: 20,
+    alignSelf: 'flex-start',
   },
   imgCircle: {
     width: 52,

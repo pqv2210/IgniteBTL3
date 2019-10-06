@@ -145,70 +145,66 @@ class LoginScreen extends Component {
           source={require('../Images/Login/BACKGROUND.png')}
           style={styles.imgBg}
         >
-          <View style={styles.header}>
+          <Image
+            source={require('../Images/Login/origami-bird.png')}
+            style={styles.origamibird}
+          />
+          <ImageBackground
+            source={require('../Images/Login/Path.png')}
+            style={styles.path}
+          >
             <Image
-              source={require('../Images/Login/origami-bird.png')}
-              style={styles.origamibird}
+              source={require('../Images/Login/User.png')}
+              style={styles.imguser}
             />
-          </View>
-          <View style={styles.viewPath}>
-            <ImageBackground
-              source={require('../Images/Login/Path.png')}
-              style={styles.path}
-            >
-              <Image
-                source={require('../Images/Login/User.png')}
-                style={styles.imguser}
-              />
-              <View style={styles.viewform}>
-                <View style={styles.box}>
-                  <Image
-                    source={require('../Images/Login/Email.png')}
-                    style={styles.iconEmail}
-                  />
-                  <TextInput
-                    placeholder='Email Address'
-                    style={styles.textip}
-                    returnKeyType='next'
-                    clearButtonMode='always'
-                    onSubmitEditing={this.onSubmit}
-                    onChangeText={this.getValueUsername}
-                    value={this.state.phone_number}
-                  />
-                </View>
+            <View style={styles.viewform}>
+              <View style={styles.box}>
                 <Image
-                  source={require('../Images/Login/Line.png')}
-                  style={styles.line}
+                  source={require('../Images/Login/Email.png')}
+                  style={styles.iconEmail}
                 />
-                <View style={styles.box}>
-                  <Image
-                    source={require('../Images/Login/Pass.png')}
-                    style={styles.iconPass}
-                  />
-                  <TextInput
-                    placeholder='Password'
-                    style={styles.textip}
-                    clearButtonMode={'while-editing'}
-                    ref={(input) => {
-                      this.secondTextInput = input
-                    }}
-                    onSubmitEditing={this.navigateToMain}
-                    secureTextEntry={true}
-                    onChangeText={this.getValuePassword}
-                    value={this.state.password}
-                  />
-                </View>
-                <Image
-                  source={require('../Images/Login/Line.png')}
-                  style={styles.line}
+                <TextInput
+                  placeholder='Email Address'
+                  style={styles.textip}
+                  returnKeyType='next'
+                  clearButtonMode='always'
+                  onSubmitEditing={this.onSubmit}
+                  onChangeText={this.getValueUsername}
+                  value={this.state.phone_number}
                 />
               </View>
-              <TouchableOpacity>
-                <Text style={styles.textForget}>Forget Password</Text>
-              </TouchableOpacity>
-              {isCheckText ? errMes : null}
-            </ImageBackground>
-          </View>
+              <Image
+                source={require('../Images/Login/Line.png')}
+                style={styles.line}
+              />
+              <View style={styles.box}>
+                <Image
+                  source={require('../Images/Login/Pass.png')}
+                  style={styles.iconPass}
+                />
+                <TextInput
+                  placeholder='Password'
+                  style={styles.textip}
+                  clearButtonMode={'while-editing'}
+                  ref={(input) => {
+                    this.secondTextInput = input
+                  }}
+                  onSubmitEditing={this.navigateToMain}
+                  secureTextEntry={true}
+                  onChangeText={this.getValuePassword}
+                  value={this.state.password}
+                />
+              </View>
+              <Image
+                source={require('../Images/Login/Line.png')}
+                style={styles.line}
+              />
+            </View>
+            <TouchableOpacity>
+              <Text style={styles.textForget}>Forget Password</Text>
+            </TouchableOpacity>
+            {isCheckText ? errMes : null}
+          </ImageBackground>
           <View style={styles.viewLogin}>
             {this.state.isLoading ? viewLoading : btnLogin}
             <TouchableOpacity

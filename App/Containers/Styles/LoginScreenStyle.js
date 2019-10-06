@@ -7,30 +7,20 @@ export default StyleSheet.create({
   imgBg: {
     width,
     height,
-  },
-  header: {
     alignItems: 'center',
-    width,
-    marginVertical: 63,
   },
   origamibird: {
     width: 96,
     height: 79,
-  },
-  viewPath: {
-    alignItems: 'center',
+    marginVertical: 63,
   },
   path: {
     width: 319,
     height: 349,
     alignItems: 'center',
   },
-  viewimguser: {
-    alignItems: 'center',
-  },
   viewform: {
     justifyContent: 'center',
-    alignItems: 'center',
     marginTop: 45,
   },
   imguser: {

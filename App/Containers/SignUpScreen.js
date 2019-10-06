@@ -17,88 +17,82 @@ class SignUpScreen extends Component {
           source={require('../Images/Login/BACKGROUND.png')}
           style={styles.imgBg}
         >
-          <View style={styles.header}>
+          <Image
+            source={require('../Images/Login/origami-bird.png')}
+            style={styles.origamibird}
+          />
+          <ImageBackground
+            source={require('../Images/Login/Path.png')}
+            style={styles.path}
+          >
             <Image
-              source={require('../Images/Login/origami-bird.png')}
-              style={styles.origamibird}
+              source={require('../Images/Login/User.png')}
+              style={styles.imguser}
             />
-          </View>
-          <View style={styles.viewPath}>
-            <ImageBackground
-              source={require('../Images/Login/Path.png')}
-              style={styles.path}
-            >
-              <Image
-                source={require('../Images/Login/User.png')}
-                style={styles.imguser}
-              />
-              <View style={styles.viewform}>
-                <View style={styles.box}>
-                  <Image
-                    source={require('../Images/Login/Email.png')}
-                    style={styles.iconEmail}
-                  />
-                  <TextInput
-                    placeholder='Email Address'
-                    style={styles.textip}
-                  />
-                </View>
+            <View style={styles.viewform}>
+              <View style={styles.box}>
                 <Image
-                  source={require('../Images/Login/Line.png')}
-                  style={styles.line}
+                  source={require('../Images/Login/Email.png')}
+                  style={styles.iconEmail}
                 />
-                <View style={styles.box}>
-                  <Image
-                    source={require('../Images/Login/Pass.png')}
-                    style={styles.iconPass}
-                  />
-                  <TextInput
-                    placeholder='Password'
-                    style={styles.textip}
-                  />
-                </View>
-                <Image
-                  source={require('../Images/Login/Line.png')}
-                  style={styles.line}
-                />
-                <View style={styles.box}>
-                  <Image
-                    source={require('../Images/Login/Pass.png')}
-                    style={styles.iconPass}
-                  />
-                  <TextInput
-                    placeholder='Confirm Password'
-                    style={styles.textip}
-                  />
-                </View>
-                <Image
-                  source={require('../Images/Login/Line.png')}
-                  style={styles.line}
+                <TextInput
+                  placeholder='Email Address'
+                  style={styles.textip}
                 />
               </View>
-              <TouchableOpacity
-                style={styles.touchSignUp}
-              >
-                <Text style={styles.textSignUp}>Sign up</Text>
-              </TouchableOpacity>
-            </ImageBackground>
-          </View>
-          <View style={styles.viewBack}>
-            <TouchableOpacity
-              style={styles.touchBack}
-              onPress={this.goBackToLogin}
-            >
-              <ImageBackground
-                source={require('../Images/Login/Circle.png')}
-                style={styles.imgCircle}
-              >
+              <Image
+                source={require('../Images/Login/Line.png')}
+                style={styles.line}
+              />
+              <View style={styles.box}>
                 <Image
-                  source={require('../Images/Login/Left-Arrow.png')}
-                  style={styles.imgArrow}
+                  source={require('../Images/Login/Pass.png')}
+                  style={styles.iconPass}
                 />
-              </ImageBackground>
+                <TextInput
+                  placeholder='Password'
+                  style={styles.textip}
+                />
+              </View>
+              <Image
+                source={require('../Images/Login/Line.png')}
+                style={styles.line}
+              />
+              <View style={styles.box}>
+                <Image
+                  source={require('../Images/Login/Pass.png')}
+                  style={styles.iconPass}
+                />
+                <TextInput
+                  placeholder='Confirm Password'
+                  style={styles.textip}
+                />
+              </View>
+              <Image
+                source={require('../Images/Login/Line.png')}
+                style={styles.line}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.touchSignUp}
+            >
+              <Text style={styles.textSignUp}>Sign up</Text>
             </TouchableOpacity>
-          </View>
+          </ImageBackground>
+          <TouchableOpacity
+            style={styles.touchBack}
+            onPress={this.goBackToLogin}
+          >
+            <ImageBackground
+              source={require('../Images/Login/Circle.png')}
+              style={styles.imgCircle}
+            >
+              <Image
+                source={require('../Images/Login/Left-Arrow.png')}
+                style={styles.imgArrow}
+              />
+            </ImageBackground>
+          </TouchableOpacity>
         </ImageBackground>
       </ScrollView>
     )
