@@ -7,11 +7,9 @@ export function* getLogin(api, action) {
   const response = yield call(api.apiLogin, data)
   if (response.ok) {
     if (response.data.status_code === 200) {
-      const payload = response.data
-      yield put(LoginActions.loginSuccess(payload))
+      yield put(LoginActions.loginSuccess(response.data))
     }
   } else {
-    const payload = response.data
-    yield put(LoginActions.loginFailure(payload))
+    yield put(LoginActions.loginFailure(response.data))
   }
 }

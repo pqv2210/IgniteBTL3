@@ -6,10 +6,8 @@ import MainActions from '../Redux/MainRedux'
 export function* getMain(api) {
   const response = yield call(api.apiGetList)
   if (response.data.status_code === 200) {
-    const payload = response.data
-    yield put(MainActions.mainSuccess(payload))
+    yield put(MainActions.mainSuccess(response.data))
   } else {
-    const payload = response.data
-    yield put(MainActions.mainFailure(payload))
+    yield put(MainActions.mainFailure(response.data))
   }
 }

@@ -17,6 +17,7 @@ const resetAction = StackActions.reset({
 class MainScreen extends Component {
   constructor(props) {
     super(props)
+    this.map = null
     this.state = {
       isLoading: true,
       data: '',
@@ -116,6 +117,39 @@ class MainScreen extends Component {
     return null
   }
 
+  hideDetail = () => {
+    this.setState({
+      isShow: false,
+    })
+  }
+
+  fitMap = () => {
+    const coordinates = this.data.map((item) => {
+      const newData = []
+      const newItem = {
+        latitude: item.lat,
+        longitude: item.lng,
+      }
+      newData.push(newItem)
+      return newData
+    })
+    console.log(coordinates)
+    if (this.map != null) {
+      this.map.fitToCoordinates(
+        coordinates,
+        {edgePadding: {
+          top: 10,
+          right: 10,
+          bottom: 10,
+          left: 10},
+        animated: false})
+    }
+  }
+
+  // componentDidUpdate() {
+  //   this.fitMap()
+  // }
+
   render() {
     const {isLoading, data, marker} = this.state
     if (isLoading) {
@@ -123,7 +157,13 @@ class MainScreen extends Component {
     }
     return (
       <View style={styles.container}>
-        <MapView style={styles.mapView}>
+        <MapView
+          ref={(ref) => {
+            this.map = ref
+          }}
+          style={styles.mapView}
+          onPress={this.hideDetail}
+        >
           {this.showMarker(data)}
         </MapView>
         <TouchableOpacity

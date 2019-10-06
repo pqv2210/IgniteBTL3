@@ -28,12 +28,10 @@ class SignUpScreen extends Component {
               source={require('../Images/Login/Path.png')}
               style={styles.path}
             >
-              <View style={styles.viewimguser}>
-                <Image
-                  source={require('../Images/Login/User.png')}
-                  style={styles.imguser}
-                />
-              </View>
+              <Image
+                source={require('../Images/Login/User.png')}
+                style={styles.imguser}
+              />
               <View style={styles.viewform}>
                 <View style={styles.box}>
                   <Image
@@ -78,14 +76,12 @@ class SignUpScreen extends Component {
                   style={styles.line}
                 />
               </View>
+              <TouchableOpacity
+                style={styles.touchSignUp}
+              >
+                <Text style={styles.textSignUp}>Sign up</Text>
+              </TouchableOpacity>
             </ImageBackground>
-          </View>
-          <View style={styles.viewSignUp}>
-            <TouchableOpacity
-              style={styles.touchSignUp}
-            >
-              <Text style={styles.textSignUp}>Sign up</Text>
-            </TouchableOpacity>
           </View>
           <View style={styles.viewBack}>
             <TouchableOpacity

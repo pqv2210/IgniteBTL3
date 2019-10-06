@@ -26,7 +26,7 @@ class LoginScreen extends Component {
     }
   }
 
-  async autoLogin() {
+  autoLogin = async () => {
     await AsyncStorage.getItem('token').then((token) => {
       this.props.navigation.navigate(token ? this.props.navigation.dispatch(resetAction) : 'LoginScreen')
     })
@@ -53,40 +53,47 @@ class LoginScreen extends Component {
         isCheckText: true,
         mesNull: 'Enter phone number.',
       })
+      return
     }
     if (!password) {
       this.setState({
         isCheckText: true,
         mesNull: 'Enter password',
       })
+      return
     }
     if (!phone_number && !password) {
       this.setState({
         isCheckText: true,
         mesNull: 'Enter phone number and password.',
       })
+      return
     }
-    if (phone_number && password) {
-      const data = {
-        phone_number: this.state.phone_number,
-        password: this.state.password,
-        device_token: '1',
-        device_os: '1',
-        checkVersion: '1',
-      }
-      this.setState({
-        isLoading: true,
-        isChecking: true,
-        isCheckText: false,
-      })
-      this.rememberUser()
-      this.props.checkLogin(data)
-      this.props.deletePayload(payload)
+    const data = {
+      phone_number: this.state.phone_number,
+      password: this.state.password,
+      device_token: '1',
+      device_os: '1',
+      checkVersion: '1',
     }
+    this.setState({
+      isLoading: true,
+      isChecking: true,
+      isCheckText: false,
+    })
+    this.rememberUser()
+    this.props.checkLogin(data)
+    this.props.deletePayload(payload)
   }
 
   navigateToSignUp = () => {
     this.props.navigation.navigate('SignUpScreen')
+  }
+
+  onSubmit = () => {
+    if (this.secondTextInput != null) {
+      this.secondTextInput.focus()
+    }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -149,12 +156,10 @@ class LoginScreen extends Component {
               source={require('../Images/Login/Path.png')}
               style={styles.path}
             >
-              <View style={styles.viewimguser}>
-                <Image
-                  source={require('../Images/Login/User.png')}
-                  style={styles.imguser}
-                />
-              </View>
+              <Image
+                source={require('../Images/Login/User.png')}
+                style={styles.imguser}
+              />
               <View style={styles.viewform}>
                 <View style={styles.box}>
                   <Image
@@ -166,9 +171,7 @@ class LoginScreen extends Component {
                     style={styles.textip}
                     returnKeyType='next'
                     clearButtonMode='always'
-                    onSubmitEditing={() => {
-                      this.secondTextInput.focus()
-                    }}
+                    onSubmitEditing={this.onSubmit}
                     onChangeText={this.getValueUsername}
                     value={this.state.phone_number}
                   />

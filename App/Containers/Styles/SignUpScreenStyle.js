@@ -23,13 +23,10 @@ export default StyleSheet.create({
   path: {
     width: 319,
     height: 349,
-  },
-  viewimguser: {
     alignItems: 'center',
   },
   viewform: {
     justifyContent: 'center',
-    alignItems: 'center',
     marginTop: 45,
   },
   imguser: {
@@ -59,16 +56,13 @@ export default StyleSheet.create({
   line: {
     width: width / 1.38,
   },
-  viewSignUp: {
-    alignItems: 'center',
-  },
   touchSignUp: {
     borderRadius: 30,
     height: 55,
     width: 140,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -45,
+    marginTop: height / 16,
     backgroundColor: '#5591ff',
   },
   textSignUp: {
