@@ -20,13 +20,13 @@ class MainScreen extends Component {
     this.map = null
     this.state = {
       isLoading: true,
-      data: '',
+      data: [],
       isShow: false,
       marker: {},
     }
   }
 
-  async removeItem() {
+  removeItem = async () => {
     await AsyncStorage.removeItem('token')
     await AsyncStorage.removeItem('phone_number')
     await AsyncStorage.removeItem('password')
@@ -124,31 +124,22 @@ class MainScreen extends Component {
   }
 
   fitMap = () => {
-    const coordinates = this.data.map((item) => {
-      const newData = []
-      const newItem = {
-        latitude: item.lat,
-        longitude: item.lng,
+    if (this.state.data != null) {
+      const coordinates = []
+      for (let i = 0; i < this.state.data.length; i++) {
+        const obj = {}
+        obj.latitude = this.state.data[i].lat
+        obj.longitude = this.state.data[i].lng
+        coordinates.push(obj)
       }
-      newData.push(newItem)
-      return newData
-    })
-    console.log(coordinates)
-    if (this.map != null) {
-      this.map.fitToCoordinates(
-        coordinates,
-        {edgePadding: {
-          top: 10,
-          right: 10,
-          bottom: 10,
-          left: 10},
-        animated: false})
+      const edgePadding = {top: 30, right: 30, bottom: 30, left: 30}
+      if (this.map != null) {
+        this.map.fitToCoordinates(
+          coordinates, {edgePadding, animated: true})
+      }
     }
+    return null
   }
-
-  // componentDidUpdate() {
-  //   this.fitMap()
-  // }
 
   render() {
     const {isLoading, data, marker} = this.state
@@ -163,6 +154,7 @@ class MainScreen extends Component {
           }}
           style={styles.mapView}
           onPress={this.hideDetail}
+          onLayout={this.fitMap}
         >
           {this.showMarker(data)}
         </MapView>

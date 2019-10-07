@@ -109,4 +109,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpScreen)
+export default connect(null, null)(SignUpScreen)
