@@ -24,7 +24,7 @@
     "git-hook": "npm run lint -s && npm run test -s"
   },
   "dependencies": {
-    "apisauce": "1.0.3",
+    "apisauce": "1.1.5",
     "eslint": "^6.4.0",
     "eslint-plugin-header": "^3.0.0",
     "eslint-plugin-jest": "^22.17.0",
